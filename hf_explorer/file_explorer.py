@@ -85,8 +85,9 @@ class FileExplorer(gr.Blocks):
             self.env_vars_display.attach_load_event(self.get_environment_variables, [])
             self.sysinfo_display.attach_load_event(self.get_disk_usage, [])
         else:
-            self.env_vars_display.attach_load_event([])
-            self.sysinfo_display.attach_load_event([])
+            pass
+            #self.env_vars_display.attach_load_event([])
+            #self.sysinfo_display.attach_load_event([])
     def get_directory_contents(self, path_str):
         try:
             path = Path(path_str).resolve()
