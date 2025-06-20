@@ -28,7 +28,8 @@ class FileExplorer(gr.Blocks):
             with gr.Accordion("HF File Explorer"):
                 gr.Markdown("# 🚀 Space Inspector Dashboard")
                 gr.Markdown("An environment explorer for your Hugging Face Space. Inspect the filesystem, installed dependencies, and system info.")
-    
+                gr.Markdown("""## ❗ Warning
+                        This will expose your environmental keys and entire file system to the user, so remember to set your Huggingface Space to Private.""")
                 self.current_dir_state = gr.State(value=self.root_path)
                 with gr.Tabs():
                     with gr.TabItem("📂 File Explorer"):
