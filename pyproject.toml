@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "gradio_file_explorer"
+name = "hf_explorer"
 version = "0.1.0"
 authors = [
   { name="broadfiled-dev" },
@@ -22,8 +22,8 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/broadfield-dev/gradio-file-explorer"
-Issues = "https://github.com/broadfield-dev/gradio-file-explorer/issues"
+Homepage = "https://github.com/broadfield-dev/HF-Explorer"
+Issues = "https://github.com/broadfield-dev/HF-Explorer/issues"
 
 [tool.setuptools.packages.find]
 where = ["."]
