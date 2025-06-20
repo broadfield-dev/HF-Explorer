@@ -29,7 +29,7 @@ class FileExplorer(gr.Blocks):
                 gr.Markdown("# 🚀 Space Inspector Dashboard")
                 gr.Markdown("An environment explorer for your Hugging Face Space. Inspect the filesystem, installed dependencies, and system info.")
                 gr.Markdown("""## ❗ Warning
-                        This will expose your environmental keys and entire file system to the user, so remember to set your Huggingface Space to Private.""")
+                        This will expose your environmental variables and entire file system to the user, so remember to set your Huggingface Space to Private.""")
                 self.current_dir_state = gr.State(value=self.root_path)
                 with gr.Tabs():
                     with gr.TabItem("📂 File Explorer"):
@@ -159,5 +159,7 @@ class FileExplorer(gr.Blocks):
             return gr.update(), gr.update(), content, filepath, gr.update()
 
     def go_up(self, current_dir):
-        path = Path(current_dir).parent
-        return self.update_file_list(str(path))
+        if not current_dir == self.root_path:
+            path = Path(current_dir).parent
+            return self.update_file_list(str(path))
+        else: pass
