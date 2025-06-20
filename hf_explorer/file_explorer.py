@@ -11,7 +11,7 @@ class FileExplorer(gr.Blocks):
     It allows users to navigate the local filesystem, view file contents, and inspect system
     and dependency information. It is designed to be easily embedded into any Gradio application.
     """
-    def __init__(self, root_path: str = "/", app_path: str = f"{os.getcwd()}", glob: str = "*", **kwargs):
+    def __init__(self, root_path: str = "/", app_path: str = f"{os.getcwd()}", glob: str = "*", DEMO=False, **kwargs):
         """
         Parameters:
             root_path (str): The default root directory for the explorer (e.g., "/").
@@ -39,8 +39,8 @@ class FileExplorer(gr.Blocks):
                                 self.up_button = gr.Button("⬆️ Go Up")
                                 self.home_button = gr.Button(f"🏠 Go to App Home ({self.app_path})")
                                 self.root_button = gr.Button(f"̸ Go to Root ({self.root_path})")
-                                gr.Markdown("### Go to Path:")
-                                self.path_input = gr.Textbox(label="Enter path and press Enter", value=self.root_path, interactive=True)
+                                gr.Markdown("### Go to Path:", visible = True if DEMO == False else False)
+                                self.path_input = gr.Textbox(label="Enter path and press Enter", value=self.root_path, interactive=True, visible = True if DEMO == False else False)
                             with gr.Column(scale=3):
                                 self.current_path_display = gr.Label(label="Current Directory")
                                 self.file_list_df = gr.DataFrame(headers=["Name", "Type", "Size (bytes)", "Modified", "Permissions"], datatype=["str", "str", "str", "str", "str"], interactive=True, row_count=(15, "dynamic"))
@@ -55,7 +55,7 @@ class FileExplorer(gr.Blocks):
                         self.refresh_pip_button = gr.Button("Refresh Pip List")
                         self.pip_list_display = gr.Code(label="pip freeze output", language="shell", lines=30)
                     
-                    with gr.TabItem("🌿 Environment Variables"):
+                    with gr.TabItem("🌿 Environment Variables", visible = True if DEMO == False else False):
                         gr.Markdown("View all environment variables available to the application (`os.environ`).")
                         self.refresh_env_button = gr.Button("Refresh Environment Variables")
                         self.env_vars_display = gr.Code(label="Environment Variables", language="shell", lines=30)
