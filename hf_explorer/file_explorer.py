@@ -55,7 +55,7 @@ class FileExplorer(gr.Blocks):
                         self.refresh_pip_button = gr.Button("Refresh Pip List")
                         self.pip_list_display = gr.Code(label="pip freeze output", language="shell", lines=30)
                     
-                    with gr.TabItem("🌿 Environment Variables", visible = True if DEMO == False else False):
+                    with gr.TabItem("🌿 Environment Variables"):
                         gr.Markdown("View all environment variables available to the application (`os.environ`).")
                         self.refresh_env_button = gr.Button("Refresh Environment Variables")
                         self.env_vars_display = gr.Code(label="Environment Variables", language="shell", lines=30)
