@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "gradio_file_explorer"
 version = "0.1.0"
 authors = [
-  { name="Your Name", email="you@example.com" },
+  { name="broadfiled-dev" },
 ]
 description = "A custom Gradio component to explore the local file system and environment."
 readme = "README.md"
@@ -22,8 +22,8 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/your-username/gradio-file-explorer"
-Issues = "https://github.com/your-username/gradio-file-explorer/issues"
+Homepage = "https://github.com/broadfield-dev/gradio-file-explorer"
+Issues = "https://github.com/broadfield-dev/gradio-file-explorer/issues"
 
 [tool.setuptools.packages.find]
 where = ["."]
