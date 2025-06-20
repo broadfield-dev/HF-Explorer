@@ -23,7 +23,7 @@ class FileExplorer(gr.Blocks):
         self.root_path = root_path
         self.app_path = app_path
         self.glob_pattern = glob
-
+        self.DEMO = DEMO
         with self:
             with gr.Accordion("HF File Explorer"):
                 gr.Markdown("# 🚀 Space Inspector Dashboard")
@@ -39,8 +39,8 @@ class FileExplorer(gr.Blocks):
                                 self.up_button = gr.Button("⬆️ Go Up")
                                 self.home_button = gr.Button(f"🏠 Go to App Home ({self.app_path})")
                                 self.root_button = gr.Button(f"̸ Go to Root ({self.root_path})")
-                                gr.Markdown("### Go to Path:", visible = True if DEMO == False else False)
-                                self.path_input = gr.Textbox(label="Enter path and press Enter", value=self.root_path, interactive=True, visible = True if DEMO == False else False)
+                                gr.Markdown("### Go to Path:", visible = True if self.DEMO == False else False)
+                                self.path_input = gr.Textbox(label="Enter path and press Enter", value=self.root_path, interactive=True, visible = True if self.DEMO == False else False)
                             with gr.Column(scale=3):
                                 self.current_path_display = gr.Label(label="Current Directory")
                                 self.file_list_df = gr.DataFrame(headers=["Name", "Type", "Size (bytes)", "Modified", "Permissions"], datatype=["str", "str", "str", "str", "str"], interactive=True, row_count=(15, "dynamic"))
@@ -81,7 +81,7 @@ class FileExplorer(gr.Blocks):
         self.refresh_sysinfo_button.click(self.get_disk_usage, [], self.sysinfo_display)
         
         self.pip_list_display.attach_load_event(self.get_pip_freeze, [])
-        if not DEMO:
+        if not self.DEMO:
             self.env_vars_display.attach_load_event(self.get_environment_variables, [])
             self.sysinfo_display.attach_load_event(self.get_disk_usage, [])
         else:
