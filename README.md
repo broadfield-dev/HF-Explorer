@@ -29,17 +29,21 @@ Using the `FileExplorer` is as simple as importing it and instantiating it withi
 
 ```python
 import gradio as gr
-from gradio_file_explorer import FileExplorer
+from hf_explorer.file_explorer import FileExplorer
 
 with gr.Blocks() as demo:
-    gr.Markdown("## My App with a Built-in File Explorer")
+    gr.Markdown("# My Awesome Application")
+    gr.Markdown("Below is an instance of the `FileExplorer` component, which can be embedded in any Gradio app.")
+    
+    # Just instantiate the component class!
+    FileExplorer(root_path = f"/home/user", DEMO=True)
+    
+    gr.Markdown("---")
+    gr.Textbox(label="You can have other Gradio components here too!")
 
-    # Simply instantiate the component
-    FileExplorer()
+if __name__ == "__main__":
+    demo.launch()
 
-    gr.Textbox(label="Other components can coexist seamlessly.")
-
-demo.launch()
 ```
 
 ## Customization
