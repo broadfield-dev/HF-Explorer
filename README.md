@@ -11,7 +11,8 @@ A custom Gradio component that provides a powerful file explorer and environment
 
 This component is particularly useful for debugging and inspecting environments in services like Hugging Face Spaces.
 
- <!-- It's a good idea to add a screenshot -->
+❗ Warning - This will expose your environmental keys and entire file system so set your Huggingface Space to Private. 
+
 
 ## Installation
 
