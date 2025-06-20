@@ -16,7 +16,7 @@ This component is particularly useful for debugging and inspecting environments 
 You can install this component directly from GitHub:
 
 ```bash
-pip install git+https://github.com/your-username/gradio-file-explorer.git
+pip install git+https://github.com/broadfield-dev/gradio-file-explorer.git
 ```
 
 ## Usage
