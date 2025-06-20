@@ -30,8 +30,6 @@ class FileExplorer(gr.Blocks):
                 gr.Markdown("An environment explorer for your Hugging Face Space. Inspect the filesystem, installed dependencies, and system info.")
     
                 self.current_dir_state = gr.State(value=self.root_path)
-        home_button.click(lambda: update_file_list(f"{os.getcwd()}"), [], [file_list_df, current_path_display, current_dir_state])
-
                 with gr.Tabs():
                     with gr.TabItem("📂 File Explorer"):
                         with gr.Row():
