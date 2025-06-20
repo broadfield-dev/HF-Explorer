@@ -1,5 +1,5 @@
 # Huggingface File Explorer Component
-![image](hf_explorer.png "Title")
+![image](splash.png)
 
 
 A custom Gradio component that provides a powerful file explorer and environment inspector. It can be easily embedded into any Gradio application to allow users to:
