@@ -11,7 +11,7 @@ class FileExplorer(gr.Blocks):
     It allows users to navigate the local filesystem, view file contents, and inspect system
     and dependency information. It is designed to be easily embedded into any Gradio application.
     """
-    def __init__(self, root_path: str = "/", app_path: str = "/code", glob: str = "*", **kwargs):
+    def __init__(self, root_path: str = "/", app_path: str = f"{os.getcwd()}", glob: str = "*", **kwargs):
         """
         Parameters:
             root_path (str): The default root directory for the explorer (e.g., "/").
@@ -30,7 +30,8 @@ class FileExplorer(gr.Blocks):
                 gr.Markdown("An environment explorer for your Hugging Face Space. Inspect the filesystem, installed dependencies, and system info.")
     
                 self.current_dir_state = gr.State(value=self.root_path)
-    
+        home_button.click(lambda: update_file_list(f"{os.getcwd()}"), [], [file_list_df, current_path_display, current_dir_state])
+
                 with gr.Tabs():
                     with gr.TabItem("📂 File Explorer"):
                         with gr.Row():
