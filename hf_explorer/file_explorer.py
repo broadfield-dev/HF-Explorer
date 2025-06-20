@@ -46,7 +46,7 @@ class FileExplorer(gr.Blocks):
                                 self.file_list_df = gr.DataFrame(headers=["Name", "Type", "Size (bytes)", "Modified", "Permissions"], datatype=["str", "str", "str", "str", "str"], interactive=True, row_count=(15, "dynamic"))
                         with gr.Row():
                             with gr.Column():
-                                gr.Markdown("### File Content Viewer")
+                                gr.Markdown("### File Content Viewer" if not DEMO else "### Disabled for Demo Mode")
                                 self.selected_file_path = gr.Textbox(label="Selected File Path", interactive=False)
                                 self.file_content_display = gr.Code(label="Content", language="python", lines=20, interactive=False)
                     
@@ -56,12 +56,12 @@ class FileExplorer(gr.Blocks):
                         self.pip_list_display = gr.Code(label="pip freeze output", language="shell", lines=30)
                     
                     with gr.TabItem("🌿 Environment Variables"):
-                        gr.Markdown("View all environment variables available to the application (`os.environ`).")
+                        gr.Markdown("View all environment variables available to the application (`os.environ`)." if not DEMO else "### Disabled for Demo Mode")
                         self.refresh_env_button = gr.Button("Refresh Environment Variables")
                         self.env_vars_display = gr.Code(label="Environment Variables", language="shell", lines=30)
     
                     with gr.TabItem("ℹ️ System Info"):
-                        gr.Markdown("View system information like disk usage.")
+                        gr.Markdown("View system information like disk usage." if not DEMO else "### Disabled for Demo Mode")
                         self.refresh_sysinfo_button = gr.Button("Refresh System Info")
                         self.sysinfo_display = gr.Code(label="df -h (Disk Usage)", language="shell", lines=20)
                 
@@ -77,13 +77,14 @@ class FileExplorer(gr.Blocks):
         self.root_button.click(lambda: self.update_file_list(self.root_path), [], [self.file_list_df, self.current_path_display, self.current_dir_state])
         
         self.refresh_pip_button.click(self.get_pip_freeze, [], self.pip_list_display)
-        self.refresh_env_button.click(self.get_environment_variables, [], self.env_vars_display)
-        self.refresh_sysinfo_button.click(self.get_disk_usage, [], self.sysinfo_display)
+
         
         self.pip_list_display.attach_load_event(self.get_pip_freeze, [])
         if not self.DEMO:
             self.env_vars_display.attach_load_event(self.get_environment_variables, [])
             self.sysinfo_display.attach_load_event(self.get_disk_usage, [])
+            self.refresh_env_button.click(self.get_environment_variables, [], self.env_vars_display)
+            self.refresh_sysinfo_button.click(self.get_disk_usage, [], self.sysinfo_display)
         else:
             pass
             #self.env_vars_display.attach_load_event([])
