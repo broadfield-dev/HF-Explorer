@@ -1,8 +1,8 @@
-# Gradio File Explorer Component
+# Huggingface File Explorer Component
 
 A custom Gradio component that provides a powerful file explorer and environment inspector. It can be easily embedded into any Gradio application to allow users to:
 
-- Navigate the local file system.
+- Navigate the local file system (Linux).
 - View and inspect file contents.
 - Check installed Python dependencies (`pip freeze`).
 - View system disk usage (`df -h`).
@@ -16,7 +16,7 @@ This component is particularly useful for debugging and inspecting environments 
 You can install this component directly from GitHub:
 
 ```bash
-pip install git+https://github.com/broadfield-dev/gradio-file-explorer.git
+pip install git+https://github.com/broadfield-dev/hf-explorer.git
 ```
 
 ## Usage
