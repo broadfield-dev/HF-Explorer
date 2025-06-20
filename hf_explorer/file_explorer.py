@@ -162,4 +162,5 @@ class FileExplorer(gr.Blocks):
         if not current_dir == self.root_path:
             path = Path(current_dir).parent
             return self.update_file_list(str(path))
-        else: pass
+        else:
+            return self.update_file_list(str(current_dir))
