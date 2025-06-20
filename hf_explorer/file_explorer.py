@@ -25,45 +25,46 @@ class FileExplorer(gr.Blocks):
         self.glob_pattern = glob
 
         with self:
-            gr.Markdown("# 🚀 Space Inspector Dashboard")
-            gr.Markdown("An environment explorer for your Hugging Face Space. Inspect the filesystem, installed dependencies, and system info.")
-
-            self.current_dir_state = gr.State(value=self.root_path)
-
-            with gr.Tabs():
-                with gr.TabItem("📂 File Explorer"):
-                    with gr.Row():
-                        with gr.Column(scale=1, min_width=250):
-                            gr.Markdown("### Navigation")
-                            self.up_button = gr.Button("⬆️ Go Up")
-                            self.home_button = gr.Button(f"🏠 Go to App Home ({self.app_path})")
-                            self.root_button = gr.Button(f"̸ Go to Root ({self.root_path})")
-                            gr.Markdown("### Go to Path:")
-                            self.path_input = gr.Textbox(label="Enter path and press Enter", value=self.root_path, interactive=True)
-                        with gr.Column(scale=3):
-                            self.current_path_display = gr.Label(label="Current Directory")
-                            self.file_list_df = gr.DataFrame(headers=["Name", "Type", "Size (bytes)", "Modified", "Permissions"], datatype=["str", "str", "str", "str", "str"], interactive=True, row_count=(15, "dynamic"))
-                    with gr.Row():
-                        with gr.Column():
-                            gr.Markdown("### File Content Viewer")
-                            self.selected_file_path = gr.Textbox(label="Selected File Path", interactive=False)
-                            self.file_content_display = gr.Code(label="Content", language="python", lines=20, interactive=False)
+            with gr.Accordion("HF File Explorer"):
+                gr.Markdown("# 🚀 Space Inspector Dashboard")
+                gr.Markdown("An environment explorer for your Hugging Face Space. Inspect the filesystem, installed dependencies, and system info.")
+    
+                self.current_dir_state = gr.State(value=self.root_path)
+    
+                with gr.Tabs():
+                    with gr.TabItem("📂 File Explorer"):
+                        with gr.Row():
+                            with gr.Column(scale=1, min_width=250):
+                                gr.Markdown("### Navigation")
+                                self.up_button = gr.Button("⬆️ Go Up")
+                                self.home_button = gr.Button(f"🏠 Go to App Home ({self.app_path})")
+                                self.root_button = gr.Button(f"̸ Go to Root ({self.root_path})")
+                                gr.Markdown("### Go to Path:")
+                                self.path_input = gr.Textbox(label="Enter path and press Enter", value=self.root_path, interactive=True)
+                            with gr.Column(scale=3):
+                                self.current_path_display = gr.Label(label="Current Directory")
+                                self.file_list_df = gr.DataFrame(headers=["Name", "Type", "Size (bytes)", "Modified", "Permissions"], datatype=["str", "str", "str", "str", "str"], interactive=True, row_count=(15, "dynamic"))
+                        with gr.Row():
+                            with gr.Column():
+                                gr.Markdown("### File Content Viewer")
+                                self.selected_file_path = gr.Textbox(label="Selected File Path", interactive=False)
+                                self.file_content_display = gr.Code(label="Content", language="python", lines=20, interactive=False)
+                    
+                    with gr.TabItem("🐍 Dependency Inspector"):
+                        gr.Markdown("View all installed Python packages in the environment (`pip freeze`).")
+                        self.refresh_pip_button = gr.Button("Refresh Pip List")
+                        self.pip_list_display = gr.Code(label="pip freeze output", language="shell", lines=30)
+                    
+                    with gr.TabItem("🌿 Environment Variables"):
+                        gr.Markdown("View all environment variables available to the application (`os.environ`).")
+                        self.refresh_env_button = gr.Button("Refresh Environment Variables")
+                        self.env_vars_display = gr.Code(label="Environment Variables", language="shell", lines=30)
+    
+                    with gr.TabItem("ℹ️ System Info"):
+                        gr.Markdown("View system information like disk usage.")
+                        self.refresh_sysinfo_button = gr.Button("Refresh System Info")
+                        self.sysinfo_display = gr.Code(label="df -h (Disk Usage)", language="shell", lines=20)
                 
-                with gr.TabItem("🐍 Dependency Inspector"):
-                    gr.Markdown("View all installed Python packages in the environment (`pip freeze`).")
-                    self.refresh_pip_button = gr.Button("Refresh Pip List")
-                    self.pip_list_display = gr.Code(label="pip freeze output", language="shell", lines=30)
-                
-                with gr.TabItem("🌿 Environment Variables"):
-                    gr.Markdown("View all environment variables available to the application (`os.environ`).")
-                    self.refresh_env_button = gr.Button("Refresh Environment Variables")
-                    self.env_vars_display = gr.Code(label="Environment Variables", language="shell", lines=30)
-
-                with gr.TabItem("ℹ️ System Info"):
-                    gr.Markdown("View system information like disk usage.")
-                    self.refresh_sysinfo_button = gr.Button("Refresh System Info")
-                    self.sysinfo_display = gr.Code(label="df -h (Disk Usage)", language="shell", lines=20)
-            
             self.load(fn=self.update_file_list, inputs=[self.current_dir_state], outputs=[self.file_list_df, self.current_path_display, self.current_dir_state])
             self._attach_event_handlers()
 
